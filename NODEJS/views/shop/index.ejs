@@ -1,0 +1,97 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+            <div class="container">
+                <h1>My Products</h1>
+                <div class="container">
+                    <% if (products.length> 0) { %>
+                        <% for( let i=0; i < products.length; i++ ) { %>
+                            <% if (i%3==0) { %>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card" style="width: 18rem;">
+                                            <img src="https://cdn2.picryl.com/photo/2019/03/08/victorian-necklace-with-multi-color-round-stone-pendant-set-in-925-silver-floral-6d8300-640.jpg" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= products[i].title %>
+                                                </h5>
+                                                <h6>
+                                                    Rs.
+                                                    <%= products[i].price %>
+                                                </h6>
+                                                <form action="/cart" method="post">
+                                                    <button type="button submit" class="btn btn-primary btn-md mr-1 mb-2"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                                                    <input type="hidden" name="productID" id="productID" value="<%= products[i].id %>">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } else if (i%3==2) { %>
+                                        <div class="col">
+                                            <div class="card" style="width: 18rem;">
+                                                <img src="https://cdn2.picryl.com/photo/2019/03/08/victorian-necklace-with-multi-color-round-stone-pendant-set-in-925-silver-floral-6d8300-640.jpg" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">
+                                                        <%= products[i].title %>
+                                                    </h5>
+                                                    <h6>Rs.
+                                                        <%= products[i].price %>
+                                                    </h6>
+                                                    <form action="/cart" method="post">
+                                                        <button type="button submit" class="btn btn-primary btn-md mr-1 mb-2"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                                                        <input type="hidden" name="productID" id="productID" value="<%= products[i].id %>">
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <% } else { %>
+                                    <div class="col">
+                                        <div class="card" style="width: 18rem;">
+                                            <img src="https://cdn2.picryl.com/photo/2019/03/08/victorian-necklace-with-multi-color-round-stone-pendant-set-in-925-silver-floral-6d8300-640.jpg" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= products[i].title %>
+                                                </h5>
+                                                <h6>Rs.
+                                                    <%= products[i].price %>
+                                                </h6>
+                                                <form action="/cart" method="post">
+                                                    <button type="button submit" class="btn btn-primary btn-md mr-1 mb-2"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                                                    <input type="hidden" name="productID" id="productID" value="<%= products[i].id %>">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } %>
+
+                                        <% } %>
+                                            <!-- demo -->
+                                            <!-- <div class="row">
+                                            <% products.forEach(product=> { %>
+                                                <div class="col-sm">
+                                                    <div class="card" style="width: 18rem;">
+                                                        <img src="https://cdn2.picryl.com/photo/2019/03/08/victorian-necklace-with-multi-color-round-stone-pendant-set-in-925-silver-floral-6d8300-640.jpg" class="card-img-top" alt="...">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">
+                                                                <%= product.title %>
+                                                            </h5>
+                                                            <h6>Rs. 2000</h6>
+                                                            <a href="#" class="btn btn-primary">Add to cart</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% }); %>
+                                        </div> -->
+                                            <!-- removed a} from below line -->
+                                            <% } else { %>
+                                                <P>No Products Found!</P>
+                                                <% } %>
+
+                </div>
+
+
+                <%- include('../includes/head.ejs') %>

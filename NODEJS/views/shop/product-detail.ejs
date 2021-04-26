@@ -1,0 +1,48 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <!-- navbar -->
+        <%- include('../includes/navigation.ejs') %>
+
+            <div class="container" style="padding-top: 1rem;">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="<%= product.imageURL %>" class="img-fluid" alt="<%= product.title %>">
+                        <hr>
+                    </div>
+                    <div class="col" style="margin-left: 2rem;">
+                        <h1 class="display-6">
+                            <%= product.title  %>
+                        </h1>
+                        <p>
+                            <%= product.description %>
+                        </p>
+                        <p>Seller:
+                            <span style="font-weight: bold;">SellerName</span>
+                        </p>
+                        <p>Availabilty:
+                            <span style="font-weight: bold; color: green;">In Stock</span>
+                        </p>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3" style="width: fit-content;">
+                                    <button type="button" class="btn btn-outline-primary"><i class="fas fa-money-bill-wave"></i>Buy now</button>
+                                </div>
+                                <div class="col-3">
+                                    <form action="/cart" method="post">
+                                        <button type="button submit" class="btn btn-outline-success"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                                        <input type="hidden" name="productID" id="productID" value="<%= product.id %>">
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+    </body>
+    <%- include('../includes/end.ejs') %>

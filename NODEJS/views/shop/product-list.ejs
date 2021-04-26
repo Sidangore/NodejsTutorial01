@@ -1,0 +1,54 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+            <div class="container">
+                <h1>All Products</h1>
+                <div class="container">
+                    <% if (products.length > 0) { %>
+                        <div class="row row-cols-4 gy-4">
+                            <% products.forEach(product => { %>
+                                <div class="col" style="height: auto;">
+                                    <div class="card bg-light text-black">
+                                        <img src="<%= product.imageURL %>" class="card-img" alt="<% product.title %>">
+                                        <div class="card-img-overlay">
+                                            <h4 class="card-title">
+                                                <%= product.title %>
+                                            </h4>
+                                            <p class="card-text">
+                                                <h5>
+                                                    Rs.
+                                                    <%= product.price %>
+                                                </h5>
+                                            </p>
+                                            <!-- <p>
+                                                <%= product.description %>
+                                            </p> -->
+                                        </div>
+                                        <div class="container" style="position: absolute; bottom: 0;">
+                                            <div class="row justify-content-around">
+                                                <div class="col">
+                                                    <a class="btn btn-outline-primary" href="/products/<%= product.id %>" role="button"><i class="fas fa-info-circle"></i>View</a>
+                                                </div>
+                                                <div class="col">
+                                                    <form action="/cart" method="post">
+                                                        <button type="button submit" class="btn btn-outline-success btn-md mr-1 mb-2"><i class="fas fa-shopping-cart pr-2"></i>+ to Cart</button>
+                                                        <input type="hidden" name="productID" id="productID" value="<%= product.id %>">
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }); %>
+                                    <% } else { %>
+                                        <P>No Products Found!</P>
+                                        <% } %>
+
+                        </div>
+
+
+                        <%- include('../includes/head.ejs') %>
+                            <%- include('../includes/head.ejs') %>

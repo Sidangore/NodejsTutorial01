@@ -1,0 +1,87 @@
+<%- include('../includes/head.ejs') %>
+
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <% if (products.length > 0) { %>
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="col-7">Product(s)</th>
+                                <th class=" col ">Quantity</th>
+                                <th class="col ">Price</th>
+                                <th class="col ">Total</th>
+                                <th class="col ">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% let subtotalPrice = 0; %>
+                                <% products.forEach(product => {  %>
+                                    <tr>
+                                        <th scope="container">
+                                            <div class="row justify-content-start">
+                                                <div class="col-2">
+                                                    <div class="img">
+                                                        <img src="<%= product.productData.imageURL %>" class="img-thumbnail" alt="<%= product.productData.title %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col justify-content-evenly">
+                                                    <a href="/products/<%= product.productData.id %>">
+                                                        <h5>
+                                                            <%= product.productData.title %>
+                                                        </h5>
+                                                    </a>
+                                                    <h6>Seller: <span> SellerName</span></h6>
+                                                    <h6>Availability: <span style="color: green;"> In Stock</span></h6>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td>x
+                                            <%= product.qty %>
+                                        </td>
+                                        <td>
+                                            Rs.
+                                            <%= product.productData.price %>
+                                        </td>
+                                        <td>
+                                            Rs.
+                                            <%= product.productData.price * product.qty %>
+                                                <% subtotalPrice += product.productData.price * product.qty %>
+                                        </td>
+                                        <td>
+                                            <form action="/cart-delete-product" method="POST">
+                                                <input type="hidden" name="productID" id="productID" value="<%= product.productData.id %>">
+                                                <button type="submit" class="btn btn-danger">Remove</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <h6>Subtotal</h6>
+                                        </td>
+                                        <td>
+                                            <h6>Rs.
+                                                <%= subtotalPrice %>
+                                            </h6>
+                                        </td>
+                                        <!-- <td></td> -->
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <% } else { %>
+                    <div class="container ">
+                        <h1>No Products!</h1>
+                    </div>
+                    <% } %>
+
+    </body>
+    <%- include('../includes/end.ejs') %>
