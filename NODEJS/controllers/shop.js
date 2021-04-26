@@ -6,9 +6,9 @@ const Cart = require('../models/cart');
 //SHOP Routes GET
 exports.getProducts = (req, res, next) => {
     //fetch All Products
-    Product.fetchAll().then(([rows, data]) => {
-        // console.log(rows, data);
-        res.render('shop/product-list', { pageTitle: "Shop", products: rows, path: '/products' });
+    Product.findAll().then(products => {
+        res.render('shop/product-list', { pageTitle: "Shop", products: products, path: '/products' });
+
     }).catch(err => {
         console.log(err);
     });
@@ -17,17 +17,17 @@ exports.getProducts = (req, res, next) => {
 // GET the product details
 exports.getProduct = (req, res, next) => {
     const productID = req.params.productID;
-    Product.findById(productID).then(([product]) => {
-        // console.log(product, '\n');
-        res.render('shop/product-detail', { pageTitle: product[0].title, product: product[0], path: '/products' });
-    }).catch(err => console.log(err));
+    Product.findByPk(productID).then(product => {
+        res.render('shop/product-detail', { pageTitle: product.title, product: product, path: '/products' });
+    }).catch(err => {
+        console.log(err);
+    });
 };
 
 // HOME PAGE
 exports.getIndex = (req, res, next) => {
-    Product.fetchAll().then(([rows, data]) => {
-        // console.log(rows, data);
-        res.render('shop/product-list', { pageTitle: "My Home Page", products: rows, path: '/' });
+    Product.findAll().then(products => {
+        res.render('shop/product-list', { pageTitle: "My Home Page", products: products, path: '/' });
     }).catch(err => {
         console.log(err);
     });
@@ -60,6 +60,7 @@ exports.postCart = (req, res, next) => {
         Cart.addProduct(productID, product.price);
     });
     res.redirect('/cart');
+    // Product.findByPk(productID).then(pr)
 }
 
 // POST /cart-delete-product
