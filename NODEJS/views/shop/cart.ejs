@@ -27,13 +27,13 @@
                                             <div class="row justify-content-start">
                                                 <div class="col-2">
                                                     <div class="img">
-                                                        <img src="<%= product.productData.imageURL %>" class="img-thumbnail" alt="<%= product.productData.title %>">
+                                                        <img src="<%= product.imageURL %>" class="img-thumbnail" alt="<%= product.title %>">
                                                     </div>
                                                 </div>
                                                 <div class="col justify-content-evenly">
-                                                    <a href="/products/<%= product.productData.id %>">
+                                                    <a href="/products/<%= product.id %>">
                                                         <h5>
-                                                            <%= product.productData.title %>
+                                                            <%= product.title %>
                                                         </h5>
                                                     </a>
                                                     <h6>Seller: <span> SellerName</span></h6>
@@ -42,20 +42,20 @@
                                             </div>
                                         </th>
                                         <td>x
-                                            <%= product.qty %>
+                                            <%= product.cartItem.quantity%>
                                         </td>
                                         <td>
                                             Rs.
-                                            <%= product.productData.price %>
+                                            <%= product.price %>
                                         </td>
                                         <td>
                                             Rs.
-                                            <%= product.productData.price * product.qty %>
-                                                <% subtotalPrice += product.productData.price * product.qty %>
+                                            <%= product.price * product.cartItem.quantity %>
+                                                <% subtotalPrice += product.price * product.cartItem.quantity %>
                                         </td>
                                         <td>
                                             <form action="/cart-delete-product" method="POST">
-                                                <input type="hidden" name="productID" id="productID" value="<%= product.productData.id %>">
+                                                <input type="hidden" name="productID" id="productID" value="<%= product.id %>">
                                                 <button type="submit" class="btn btn-danger">Remove</button>
                                             </form>
                                         </td>
@@ -77,9 +77,14 @@
 
                     </table>
                 </div>
+                <div class="container">
+                    <form action="/create-order" method="post">
+                        <button type="submit button" class="btn btn-success">Check Out</button>
+                    </form>
+                </div>
                 <% } else { %>
                     <div class="container ">
-                        <h1>No Products!</h1>
+                        <h1 class="display-6" style="text-align: center;">No Products!</h1>
                     </div>
                     <% } %>
 
