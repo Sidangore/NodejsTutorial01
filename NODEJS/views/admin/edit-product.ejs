@@ -32,7 +32,7 @@
                         <input type="number" class="form-control" name="price" id="price" aria-label="Amount (to the nearest Ruppee)" value="<% if(editing) { %><%= product.price %><% } %>">
                     </div>
                     <% if (editing) { %>
-                        <input type="hidden" value="<%= product.id %>" name="productID">
+                        <input type="hidden" value="<%= product._id %>" name="productID">
                         <% } %>
                             <button type="button submit" class="btn <% if (editing) { %>
                         btn-outline-warning

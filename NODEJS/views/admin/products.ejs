@@ -31,11 +31,11 @@
                                         <div class="container" style="position: absolute; bottom: 0; padding-bottom: 0.5rem;">
                                             <div class="row justify-content-around">
                                                 <div class="col">
-                                                    <a href="/admin/edit-product/<%= product.id %>?edit=true" class="btn btn-warning ">Edit</a>
+                                                    <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn btn-warning ">Edit</a>
                                                 </div>
                                                 <div class="col">
                                                     <form action="/admin/delete-product" method="POST">
-                                                        <input type="hidden" value="<%= product.id %>" name="productID">
+                                                        <input type="hidden" value="<%= product._id %>" name="productID">
                                                         <button class="btn btn-danger " type="submit">Delete</button>
                                                     </form>
                                                 </div>
