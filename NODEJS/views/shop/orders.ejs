@@ -1,0 +1,53 @@
+<%- include('../includes/head.ejs') %>
+
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <div class="container">
+                <% if (orders.length <= 0) {  %>
+
+                    <h1 class="display-6" style="text-align: center;">No Orders</h1>
+                    <% } else { %>
+                        <h1 class="display-6" style="text-align: center;">My Recent Orders</h1>
+                        <div class="container">
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <div class="col">
+                                    <% orders.forEach(order => { %>
+                                        <div class="card border-dark mb-3">
+                                            <div class="card-header">Order ID #
+                                                <%= order.id %> |
+                                                    <%= order.createdAt %>
+                                            </div>
+                                            <div class="card-body text-dark">
+                                                <!-- <h5 class="card-title">Dark card title</h5> -->
+                                                <% order.products.forEach(product => { %>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <%= product.title %>
+                                                        </div>
+                                                        <div class="col">
+                                                            x
+                                                            <%= product.orderItem.quantity %>
+                                                        </div>
+                                                        <div class="col">
+                                                            <!-- <%= product.title %> -->
+                                                        </div>
+                                                    </div>
+                                                    <% }); %>
+                                            </div>
+                                            <% }); %>
+                                        </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+
+
+
+                        <%- include('../includes/end.ejs') %>
+
+                            <%- include('../includes/end.ejs') %>
