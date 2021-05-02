@@ -7,7 +7,7 @@ const mongoConnect = (callback) => {
     MongoClient.connect('mongodb+srv://angoresid:angoresid@cluster0.wtgd9.mongodb.net/shop?retryWrites=true&w=majority', { useUnifiedTopology: true })
         .then(
             client => {
-                console.log('Connected! to DB');
+                console.log('Connected to DB!');
                 _db = client.db();
                 callback(client);
             }

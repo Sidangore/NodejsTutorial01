@@ -15,20 +15,20 @@ router.get('/products', shopController.getProducts);
 // GET the specific product Details /products/{id}
 router.get('/products/:productID', shopController.getProduct);
 
-// // GET /cart
-// router.get('/cart', shopController.getCart);
+// GET /cart
+router.get('/cart', shopController.getCart);
 
 // POST /cart
 router.post('/cart', shopController.postCart);
 
-// // POST delete product from the cart
-// router.post('/cart-delete-product', shopController.postDeleteCartProduct);
+// POST delete product from the cart
+router.post('/cart-delete-product', shopController.postDeleteCartProduct);
 
-// //GET /orders
-// router.get('/orders', shopController.getOrders);
+//GET /orders
+router.get('/orders', shopController.getOrders);
 
-// // POST Orders
-// router.post('/create-order', shopController.postOrders);
+// POST Orders
+router.post('/create-order', shopController.postOrders);
 
 // // GET /checkout
 // router.get('/checkout', shopController.getCheckout);

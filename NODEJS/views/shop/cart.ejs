@@ -31,7 +31,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col justify-content-evenly">
-                                                    <a href="/products/<%= product.id %>">
+                                                    <a href="/products/<%= product._id %>">
                                                         <h5>
                                                             <%= product.title %>
                                                         </h5>
@@ -42,7 +42,7 @@
                                             </div>
                                         </th>
                                         <td>x
-                                            <%= product.cartItem.quantity%>
+                                            <%= product.quantity%>
                                         </td>
                                         <td>
                                             Rs.
@@ -50,12 +50,12 @@
                                         </td>
                                         <td>
                                             Rs.
-                                            <%= product.price * product.cartItem.quantity %>
-                                                <% subtotalPrice += product.price * product.cartItem.quantity %>
+                                            <%= product.price * product.quantity %>
+                                                <% subtotalPrice += product.price * product.quantity %>
                                         </td>
                                         <td>
                                             <form action="/cart-delete-product" method="POST">
-                                                <input type="hidden" name="productID" id="productID" value="<%= product.id %>">
+                                                <input type="hidden" name="productID" id="productID" value="<%= product._id %>">
                                                 <button type="submit" class="btn btn-danger">Remove</button>
                                             </form>
                                         </td>

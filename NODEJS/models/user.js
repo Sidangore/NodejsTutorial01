@@ -48,7 +48,76 @@ class User {
                 }
             });
     }
-}
 
+    getCart() {
+        const db = getDb();
+        const productIds = this.cart.items.map(i => {
+            return i.productID;
+        });
+        return db.collection('products').find({
+                _id: { $in: productIds }
+            })
+            .toArray()
+            .then(products => {
+                return products.map(p => {
+                    return {...p,
+                        quantity: this.cart.items.find(i => {
+                            return i.productID.toString() === p._id.toString();
+                        }).quantity
+                    }
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    deleteCartItemById(productID) {
+        const updatedCartItems = this.cart.items.filter(item => {
+            return item.productID.toString() !== productID.toString();
+        });
+        const db = getDb();
+        return db.collection('users').updateOne({
+            _id: new mongodb.ObjectID(this._id)
+        }, {
+            $set: { cart: { items: updatedCartItems } }
+        })
+    }
+
+    addOrder() {
+        const db = getDb();
+        return this.getCart().then(products => {
+                const order = {
+                    items: products,
+                    user: {
+                        _id: new mongodb.ObjectID(this._id),
+                        username: this.username,
+                        email: this.email
+                    }
+                };
+                return db.collection('orders').insertOne(order);
+            })
+            .then(result => {
+                this.cart = { items: [] };
+                return db.collection('users').updateOne({
+                    _id: new mongodb.ObjectID(this._id)
+                }, {
+                    $set: { cart: { items: [] } }
+                })
+            });
+    }
+
+    getOrders() {
+        const db = getDb();
+        return db.collection('orders').find({ 'user._id': new mongodb.ObjectID(this._id) }).toArray().then(
+            orders => {
+                // console.log('Orders of the user: ', orders);
+                return orders;
+            }
+        ).catch(err => {
+            console.log(err);
+        });
+    }
+}
 
 module.exports = User;
