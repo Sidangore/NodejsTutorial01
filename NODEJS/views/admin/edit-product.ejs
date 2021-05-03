@@ -6,7 +6,7 @@
         <%- include('../includes/navigation.ejs') %>
 
             <div class="container">
-                <form action="/admin/<% if(editing) { %>edit-product<% } else { %>add-product<% } %> " method="POST">
+                <form action="/admin/<% if(editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
                     <!-- title -->
                     <label for="title" class="form-label">Title</label>
                     <div class="input-group mb-3">

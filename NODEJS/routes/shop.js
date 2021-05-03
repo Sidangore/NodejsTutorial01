@@ -12,26 +12,23 @@ router.get('/', shopController.getIndex);
 //GET /products
 router.get('/products', shopController.getProducts);
 
-// GET the specific product Details /products/{id}
+// (GET) Single product Detail page
 router.get('/products/:productID', shopController.getProduct);
 
-// // GET /cart
-// router.get('/cart', shopController.getCart);
+// (GET) Cart
+router.get('/cart', shopController.getCart);
 
-// POST /cart
+// (POST) Cart
 router.post('/cart', shopController.postCart);
 
-// // POST delete product from the cart
-// router.post('/cart-delete-product', shopController.postDeleteCartProduct);
+// (POST) Remove Item from Cart
+router.post('/cart-delete-product', shopController.postDeleteCartProduct);
 
-// //GET /orders
-// router.get('/orders', shopController.getOrders);
+//(GET) Orders
+router.get('/orders', shopController.getOrders);
 
-// // POST Orders
-// router.post('/create-order', shopController.postOrders);
-
-// // GET /checkout
-// router.get('/checkout', shopController.getCheckout);
+// (POST) Orders
+router.post('/create-order', shopController.postOrders);
 
 //Exports
 module.exports = router;
