@@ -4,22 +4,22 @@ const path = require('path');
 const adminController = require('../controllers/admin');
 // const rootDirectory = require('../utility/path');
 
-// /admin/add-product => GET
+// (GET Products
 router.get('/add-product', adminController.getAddProduct);
 
-// /admin/add-product => POST
+// (POST) Add Product
 router.post("/add-product", adminController.postAddProduct);
 
-// GET /admin/products
+// (GET) Admin Products
 router.get('/products', adminController.getProducts);
 
-// GET /admin/edit/:productID
+// (GET) Edit Product
 router.get('/edit-product/:productID', adminController.getEditProduct);
 
-// POST /admin/edit-product
+// (POST) Edit Product
 router.post('/edit-product', adminController.postEditProduct);
 
-// POST for DELETE
+// (POST) Delete Product
 router.post('/delete-product', adminController.postDeleteProduct);
 
 module.exports = router;
