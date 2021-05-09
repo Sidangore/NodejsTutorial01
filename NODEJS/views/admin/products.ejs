@@ -3,53 +3,51 @@
 
     <body>
         <%- include('../includes/navigation.ejs') %>
-
             <div class="container">
-                <h1>My Products</h1>
-                <div class="container">
-                    <% if (products.length > 0) { %>
-                        <div class="row row-cols-4 gy-4">
-                            <% products.forEach(product => { %>
-                                <div class="col" style="height: auto;">
-                                    <div class="card bg-light text-black">
-                                        <img src="<%= product.imageURL %>" class="card-img" alt="<% product.title %>">
-                                        <div class="card-img-overlay">
-                                            <h4 class="card-title">
-                                                <%= product.title %>
-                                            </h4>
-                                            <p class="card-text">
-                                                <h5>
-                                                    Rs.
-                                                    <%= product.price %>
-                                                </h5>
-                                            </p>
-                                            <!-- <p>
+                <% if (products.length > 0) { %>
+                    <div class="container">
+                        <h1 class="display-6" style="text-align: center;">Your Products</h1>
+                    </div>
+                    <div class="row row-cols-4 gy-4">
+                        <% products.forEach(product => { %>
+                            <div class="col" style="height: auto;">
+                                <div class="card bg-light text-black">
+                                    <img src="<%= product.imageURL %>" class="card-img" alt="<% product.title %>">
+                                    <div class="card-img-overlay">
+                                        <h4 class="card-title">
+                                            <%= product.title %>
+                                        </h4>
+                                        <p class="card-text">
+                                            <h5>
+                                                Rs.
+                                                <%= product.price %>
+                                            </h5>
+                                        </p>
+                                        <!-- <p>
                                                     <%= product.description %>
                                                 </p> -->
-                                        </div>
-                                        <!-- Button Group  -->
-                                        <div class="container" style="position: absolute; bottom: 0; padding-bottom: 0.5rem;">
-                                            <div class="row justify-content-around">
-                                                <div class="col">
-                                                    <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn btn-warning ">Edit</a>
-                                                </div>
-                                                <div class="col">
-                                                    <form action="/admin/delete-product" method="POST">
-                                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                                        <input type="hidden" value="<%= product._id %>" name="productID">
-                                                        <button class="btn btn-danger " type="submit">Delete</button>
-                                                    </form>
-                                                </div>
+                                    </div>
+                                    <!-- Button Group  -->
+                                    <div class="container" style="position: absolute; bottom: 0; padding-bottom: 0.5rem;">
+                                        <div class="row justify-content-around">
+                                            <div class="col">
+                                                <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn btn-warning ">Edit</a>
+                                            </div>
+                                            <div class="col">
+                                                <form action="/admin/delete-product" method="POST">
+                                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                    <input type="hidden" value="<%= product._id %>" name="productID">
+                                                    <button class="btn btn-danger " type="submit">Delete</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <% }); %>
-                                    <% } else { %>
-                                        <P>No Products Found!</P>
-                                        <% } %>
-
-                        </div>
-
-
-                        <%- include('../includes/head.ejs') %>
+                            </div>
+                            <% }); %>
+                    </div>
+                    <% } else { %>
+                        <h1 class="display-6" style="text-align: center;">No Products!</h1>
+                        <% } %>
+            </div>
+            <%- include('../includes/head.ejs') %>

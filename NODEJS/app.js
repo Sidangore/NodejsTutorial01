@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const mongodbStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
+const flash = require('connect-flash');
 
 const mongodbUri = "mongodb+srv://angoresid:angoresid@cluster0.wtgd9.mongodb.net/shop";
 const app = express();
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
         .catch(err => console.log(err));
 });
 const csrfProtection = csrf();
+app.use(flash());
 app.use(csrfProtection);
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedIn;
