@@ -18,7 +18,7 @@ exports.getIndex = (req, res, next) => {
     Product
         .find()
         .then(products => {
-            res.render('shop/product-list', { pageTitle: "My Home Page", products: products, path: '/' });
+            res.render('shop/index', { pageTitle: "My Home Page", products: products, path: '/' });
         })
         .catch(err => { console.log(err); });
 };
@@ -42,11 +42,12 @@ exports.getCart = (req, res, next) => {
         .populate('cart.items.productID')
         .execPopulate()
         .then(user => {
+            console.log(user);
             res.render('shop/cart', {
                 path: '/cart',
                 pageTitle: 'Your Cart',
-                products: user.cart.items
-            })
+                products: user.cart.items,
+            });
         })
         .catch(err => {
             console.log(err);

@@ -1,8 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const mongodbStore = require('connect-mongodb-session')(session);
+const csrf = require('csurf');
+const flash = require('connect-flash');
+
+const mongodbUri = "mongodb+srv://angoresid:angoresid@cluster0.wtgd9.mongodb.net/shop";
+const app = express();
+const store = new mongodbStore({
+    uri: mongodbUri,
+    collection: 'sessions',
+});
 
 //controllers
 const errorController = require('./controllers/error');
@@ -16,47 +26,41 @@ app.set('views', 'views');
 
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-// const { getProducts } = require('./controllers/admin');
+const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({ secret: 'mysecret', resave: false, saveUninitialized: false, store: store }));
 app.use((req, res, next) => {
-    User.findById("60900906850142039031125a")
+    if (!req.session.user) {
+        return next();
+    }
+    User.findById(req.session.user._id)
         .then(user => {
             req.user = user;
             next();
         })
         .catch(err => console.log(err));
 });
+const csrfProtection = csrf();
+app.use(flash());
+app.use(csrfProtection);
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.csrfToken = req.csrfToken();
+    // console.log(res.locals.csrfToken);
+    next();
+});
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
-
-//404 Page 
+app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-    .connect("mongodb+srv://angoresid:angoresid@cluster0.wtgd9.mongodb.net/shop?retryWrites=true", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+    .connect(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
     .then(() => {
-        User
-            .findOne()
-            .then(user => {
-                if (!user) {
-                    // To Create a New User
-                    const user = new User({
-                        username: 'Siddhant',
-                        email: 'sid.angore@gmail.com',
-                        cart: {
-                            items: []
-                        }
-                    });
-                    user.save();
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
         app.listen(3000);
         console.log('Connected to DB!');
     })

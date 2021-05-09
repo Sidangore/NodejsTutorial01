@@ -32,12 +32,15 @@
                                                 <div class="col">
                                                     <a class="btn btn-outline-primary" href="/products/<%= product._id %>" role="button"><i class="fas fa-info-circle"></i>View</a>
                                                 </div>
-                                                <div class="col">
-                                                    <form action="/cart" method="post">
-                                                        <button type="button submit" class="btn btn-outline-success btn-md mr-1 mb-2"><i class="fas fa-shopping-cart pr-2"></i>+ to Cart</button>
-                                                        <input type="hidden" name="productID" id="productID" value="<%= product._id %>">
-                                                    </form>
-                                                </div>
+                                                <% if (isAuthenticated) { %>
+                                                    <div class="col">
+                                                        <form action="/cart" method="POST">
+                                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                            <button type="button submit" class="btn btn-outline-success btn-md mr-1 mb-2"><i class="fas fa-shopping-cart pr-2"></i>+ to Cart</button>
+                                                            <input type="hidden" name="productID" id="productID" value="<%= product._id %>">
+                                                        </form>
+                                                    </div>
+                                                    <% } %>
                                             </div>
                                         </div>
                                     </div>

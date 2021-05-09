@@ -22,21 +22,39 @@
                 <li class="nav-item">
                     <a class="nav-link <%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <%= path === '/cart' ? 'active' : '' %>" href="/cart">My Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <%= path === '/orders' ? 'active' : '' %>" href="/orders">My Orders</a>
-                </li>
+                <% if(isAuthenticated) { %>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === '/cart' ? 'active' : '' %>" href="/cart">My Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === '/orders' ? 'active' : '' %>" href="/orders">My Orders</a>
+                    </li>
+                    <% } %>
             </ul>
-            <!-- Right  -->
+            <!-- Admin  -->
             <ul class=" navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link <%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product</a>
-                </li>
+                <% if(isAuthenticated) { %>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="/logout" method="POST">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="button submit" class="btn btn-outline-danger">Logout</button>
+                        </form>
+                    </li>
+                    <% } else { %>
+                        <!-- Login -->
+                        <li class="nav-item">
+                            <!-- <button type="button" class="btn btn-outline-danger">Logout</button> -->
+                            <a class="btn btn-outline-success" type="button" href="/login">Login</a>
+                            <!-- <button type="button" class="btn btn-outline-danger">Logout</button> -->
+                            <a class="btn btn-outline-primary" type="button" href="/signup">Signup</a>
+                        </li>
+                        <% } %>
             </ul>
         </div>
     </div>
