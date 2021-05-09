@@ -7,17 +7,18 @@
 
             <div class="container">
                 <form action="/admin/<% if(editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <!-- title -->
                     <label for="title" class="form-label">Title</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" id="title" value="<% if(editing) { %><%= product.title %><% } %>" name="title">
                     </div>
+
+
                     <!-- imageURL -->
                     <label for="image-url " class="form-label ">Image URL</label>
                     <div class="input-group mb-3 ">
                         <span class="input-group-text " id="basic-addon3 ">Link:- </span>
-                        <input type="text" class="form-control " id="image-url " name="imageURL" aria-describedby="basic-addon3 " value="<% if(editing) { %><%= product.imageURL %><% } %>">
+                        <input type="text " class="form-control " id="image-url " name="imageURL" aria-describedby="basic-addon3 " value="<% if(editing) { %><%= product.imageURL %><% } %>">
                     </div>
                     <!-- description -->
                     <label for="description" class="form-label">Description</label>

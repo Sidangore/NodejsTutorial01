@@ -1,34 +1,34 @@
 // Note:- always put the specific route above than a dynamic routes
 const express = require('express');
 const router = express.Router();
-const isAuth = require('../middleware/is-auth');
+const path = require('path');
 
 //Controllers
 const shopController = require('../controllers/shop');
 
-// Starting page
+//starting page
 router.get('/', shopController.getIndex);
 
-// (GET) Products
+//GET /products
 router.get('/products', shopController.getProducts);
 
 // (GET) Single product Detail page
 router.get('/products/:productID', shopController.getProduct);
 
 // (GET) Cart
-router.get('/cart', isAuth, shopController.getCart);
+router.get('/cart', shopController.getCart);
 
 // (POST) Cart
-router.post('/cart', isAuth, shopController.postCart);
+router.post('/cart', shopController.postCart);
 
 // (POST) Remove Item from Cart
-router.post('/cart-delete-product', isAuth, shopController.postDeleteCartProduct);
+router.post('/cart-delete-product', shopController.postDeleteCartProduct);
 
 //(GET) Orders
-router.get('/orders', isAuth, shopController.getOrders);
+router.get('/orders', shopController.getOrders);
 
 // (POST) Orders
-router.post('/create-order', isAuth, shopController.postOrders);
+router.post('/create-order', shopController.postOrders);
 
 //Exports
 module.exports = router;
